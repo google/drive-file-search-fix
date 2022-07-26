@@ -17,7 +17,7 @@ const { google } = require('googleapis');
 const sheets = require('../utilities/sheets/sheets.js')
 
 async function changeAccess(id, owner) {
-    const domainlist = JSON.parse(process.env.DOMAIN_LiST)
+    const domainlist = JSON.parse(process.env.DOMAIN_LIST)
     const domain = owner.split('@')[1]
     if (!domainlist.includes(domain)) {
         //Owner is not in the domain so we cannot change access.
@@ -68,7 +68,7 @@ async function changeAccess(id, owner) {
             }
         })
     })
-    return 'ok'
+    return true
 }
 
 const driveQuery = async () => {
@@ -94,7 +94,8 @@ const driveQuery = async () => {
             count = count + 1
             const file = files[i]
             let owner
-            if (file.owners && file.owners.length > 0 && (file.owners[0].emailAddress.indexOf('schools.nyc.gov') > -1 || file.owners[0].emailAddress.indexOf('nycstudents.net') > -1 || file.owners[0].emailAddress.indexOf('doeexternal.nyc') > -1)) {
+            
+            if (file.owners && file.owners.length > 0 && process.env.DOMAINLIST.includes(file.owners[0].emailAddress.split('@')[1])) {
                 owner = file.owners[0].emailAddress
             }
             else if (file && file.lastModifyingUser && file.lastModifyingUser.emailAddress) {
