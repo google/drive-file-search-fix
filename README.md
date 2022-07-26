@@ -16,13 +16,18 @@ limitations under the License.
 Instructions for Setup:
 
 Create a project in GCP under your organization. 
-Navigate to the project and create a service account at https://console.cloud.google.com/iam-admin/serviceaccounts?project=[your projectid]
+Navigate to the project and create a service account at 
+```
+https://console.cloud.google.com/iam-admin/serviceaccounts?project=PROJECT_ID
+```
 
 Once the service account is created click the account and select KEYS from the top tab. Use the ADD KEY button to add a JSON key. Download the file and place it in the Credentials folder. 
 
 Add the Client ID and the Drive scope to the domainwide delegation setting on the admin console. You can ise the below link replacing the clientID with the id from the GCP Service Account
 
-https://admin.google.com/ac/owl/domainwidedelegation?clientScopeToAdd=https://www.googleapis.com/auth/drive&clientIdToAdd=[CLIENT ID]&overwriteClientId=true
+```
+https://admin.google.com/ac/owl/domainwidedelegation?clientScopeToAdd=https://www.googleapis.com/auth/drive&clientIdToAdd=CLIENT_ID&overwriteClientId=true
+```
 
 
 Adjust the .env file to include the following:
@@ -56,7 +61,7 @@ This is the file name of the credentials used. Credentials are created in the IA
 ```
 CREDENTIALS=<credentials filename>
 ```
-Install the gcloud CLI if it's not ret installed. https://cloud.google.com/sdk/docs/install
+Install the gcloud CLI if it's not yet installed. https://cloud.google.com/sdk/docs/install
 
 Login to gcloud 
 ```
