@@ -12,5 +12,6 @@
 # below:
 .git
 .gitignore
+.DS_Store
 
 node_modules
