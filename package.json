@@ -18,7 +18,7 @@
     "fs": "0.0.1-security",
     "google-auth-library": "^6.1.0",
     "googleapis": "^60.0.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.1"
   }
