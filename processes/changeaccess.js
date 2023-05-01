@@ -51,24 +51,40 @@ async function changeAccess(id, owner) {
 
     permissions.forEach(async (perm) => {
         //remove the permission
+        
         await drive.permissions.delete({
             fileId: id,
             permissionId: perm.id,
             supportsAllDrives: true
         })
         //add a new permission which removes the file discovery
-        await drive.permissions.create({
-            fileId: id,
-            moveToNewOwnersRoot: false,
-            sendNotificationEmail: false,
-            supportsAllDrives: true,
-            requestBody: {
-                allowFileDiscovery: false,
-                domain: proccess.env.DOMAIN,
-                role: perm.role,
-                type: perm.type,
-            }
-        })
+        if(perm.type == 'domain'){
+            await drive.permissions.create({
+                fileId: id,
+                moveToNewOwnersRoot: false,
+                sendNotificationEmail: false,
+                supportsAllDrives: true,
+                requestBody: {
+                    allowFileDiscovery: false,
+                    domain: process.env.DOMAIN,
+                    role: perm.role,
+                    type: perm.type,
+                }
+            })
+        }else{
+             await drive.permissions.create({
+                fileId: id,
+                moveToNewOwnersRoot: false,
+                sendNotificationEmail: false,
+                supportsAllDrives: true,
+                requestBody: {
+                    allowFileDiscovery: false,
+                    role: perm.role,
+                    type: perm.type,
+                }
+            })
+        }
+        
     })
     return true
 }
